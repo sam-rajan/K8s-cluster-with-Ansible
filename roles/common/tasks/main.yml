@@ -1,0 +1,10 @@
+---
+- name: Installing essential softwares
+  apt:
+    update_cache: yes
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - gnupg2

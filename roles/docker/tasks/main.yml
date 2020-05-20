@@ -1,0 +1,23 @@
+---
+- name: Adding Docker’s official GPG key
+  shell: 
+    cmd: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -"
+    warn: no
+- name: Adding Docker repository with apt repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ os_release_name }} stable"
+    state: present
+    update_cache: no
+- name: Installing Docker CE
+  apt:
+    update_cache: yes
+    name:
+      - containerd.io=1.2.10-3
+      - docker-ce=5:19.03.4~3-0~ubuntu-{{ os_release_name }}
+      - docker-ce-cli=5:19.03.4~3-0~ubuntu-{{ os_release_name }}
+- name: Copying docker daemon config file
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+  notify: 
+      - Restart Docker

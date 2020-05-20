@@ -1,0 +1,8 @@
+- name: Installing Kubectl
+  apt:
+    update_cache: yes
+    name:
+      - kubectl
+- name: Adding Kubectl Bash Completion
+  shell:
+    cmd: kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl >/dev/null

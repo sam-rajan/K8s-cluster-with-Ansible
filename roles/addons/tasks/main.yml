@@ -1,0 +1,5 @@
+---
+- name: Installing Calico Pod network add-on
+  command: kubectl --kubeconfig={{ kube_config_file }} apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
+- name: Deploying the Dashboard UI
+  command: kubectl --kubeconfig={{ kube_config_file }} apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml

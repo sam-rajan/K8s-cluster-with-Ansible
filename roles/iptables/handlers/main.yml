@@ -1,0 +1,28 @@
+---
+- name: switch to legacy versions - iptables
+  alternatives:
+    name: iptables
+    path: /usr/sbin/iptables-legacy
+  ignore_errors: yes 
+  listen: "Switch to Legacy"
+
+- name: switch to legacy versions - ip6tables
+  alternatives:
+    name: ip6tables
+    path: /usr/sbin/ip6tables-legacy
+  ignore_errors: yes 
+  listen: "Switch to Legacy"
+
+- name: switch to legacy versions - arptables
+  alternatives:
+    name: arptables
+    path: /usr/sbin/arptables-legacy
+  ignore_errors: yes
+  listen: "Switch to Legacy"
+
+- name: switch to legacy versions - ebtables
+  alternatives:
+    name: ebtables
+    path: /usr/sbin/ebtables-legacy
+  ignore_errors: yes 
+  listen: "Switch to Legacy"

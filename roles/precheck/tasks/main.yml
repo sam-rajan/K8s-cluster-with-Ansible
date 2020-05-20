@@ -1,0 +1,10 @@
+---
+- name: Finding Mac Address and UUID of all hosts
+  set_fact:
+    productId: "product_uuid of host {{ inventory_hostname }} is {{ ansible_product_uuid }}"
+    macAddress: "MAC address of host {{ inventory_hostname }} is {{ ansible_default_ipv4.macaddress }}"
+  tags: [print_id]
+- name: Verify the Product UUID and MAC Address
+  pause:
+    prompt: "Make sure that the MAC address and product_uuid are unique for every node and Press Enter, or Ctrl + C to terminate"
+  delegate_to: 127.0.0.1

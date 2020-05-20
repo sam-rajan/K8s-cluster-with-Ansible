@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: yes
+  pre_tasks: 
+    - include_role:
+        name: precheck
+  roles:
+    - common
+    - iptables
+    - docker
+    - k8s
+
+- hosts: masters
+  become: yes
+  roles:
+    - k8s-cli
+    - cluster-init
+
+- hosts: slaves
+  become: yes
+  roles:
+    - cluster-join
+
+- hosts: masters
+  become: yes
+  roles:
+    - addons
+  tags:
+  - addon

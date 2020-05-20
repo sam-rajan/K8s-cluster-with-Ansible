@@ -1,0 +1,2 @@
+---
+os_release_name: "{{ hostvars[inventory_hostname].ansible_distribution_release }}"

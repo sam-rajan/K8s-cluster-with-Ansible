@@ -1,0 +1,11 @@
+---
+- name: Initalizing the Kubernetes Cluster
+  command: kubeadm init --apiserver-advertise-address="{{ ansible_default_ipv4.address }}" --apiserver-cert-extra-sans="{{ ansible_default_ipv4.address }}"
+- name: Extracting Cluster Join command
+  command: kubeadm token create --print-join-command
+  register: join_token
+- name: Copying join script to file
+  delegate_to: 127.0.0.1
+  copy:
+    content: "{{ join_token.stdout_lines[0] }}"
+    dest: "./join-script"

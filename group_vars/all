@@ -1,0 +1,2 @@
+ansible_user: sam
+ansible_ssh_pass: Passw0rd

@@ -1,0 +1,8 @@
+- name: Copying the join script to remote machine
+  copy: 
+    src: join-script 
+    dest: /tmp/join-script.sh 
+    mode: 0777
+- name: Executing the join script
+  shell:
+    cmd: /tmp/join-script.sh

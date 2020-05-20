@@ -1,0 +1,26 @@
+---
+- name: Adding Google Cloud package GPG key
+  shell: 
+    cmd: "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
+    warn: no
+- name: Adding Kubernetes repository with apt repository
+  apt_repository:
+    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+    state: present
+    update_cache: no
+- name: Remove Swap file
+  mount:
+    name: swap
+    fstype: swap
+    state: absent
+- name: Disabling swap in order for the kubelet to work properly
+  command: swapoff -a
+  when: ansible_swaptotal_mb > 0
+- name: Installing Kubeadm and Kubelet
+  apt:
+    update_cache: yes
+    name:
+      - kubelet
+      - kubeadm
+  notify: 
+    - Restart Kubelet
