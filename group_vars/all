@@ -1,2 +1,2 @@
-ansible_user: sam
-ansible_ssh_pass: Passw0rd
+ansible_user: <Your ssh username>
+ansible_ssh_pass: <Your ssh password>
