@@ -1,13 +1,13 @@
 ---
+- name: Creates Keyring directory if not exist
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    recurse: yes
 - name: Adding Google Cloud package GPG key
-  shell: 
-    cmd: "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
-    warn: no
+  shell: curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
 - name: Adding Kubernetes repository with apt repository
-  apt_repository:
-    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
-    state: present
-    update_cache: no
+  shell: echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 - name: Remove Swap file
   mount:
     name: swap
