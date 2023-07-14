@@ -1,0 +1,17 @@
+---
+- name: Installing Containerd CE
+  apt:
+    update_cache: yes
+    name:
+      - containerd.io
+- name: Creates containerd directory
+  file:
+    path: /etc/containerd
+    state: directory
+    recurse: yes
+- name: Configuring runtime endpoint for crictl
+  command: crictl config runtime-endpoint unix:///run/containerd/containerd.sock
+- name: Generating Containerd Config
+  command: containerd config default > /etc/containerd/config.toml
+  notify: 
+      - Restart Containerd

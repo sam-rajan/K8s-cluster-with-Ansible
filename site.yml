@@ -7,7 +7,7 @@
   roles:
     - common
     - iptables
-    - docker
+    - containerd
     - k8s
 
 - hosts: masters
