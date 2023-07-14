@@ -14,4 +14,4 @@
 - name: Generating Containerd Config
   command: containerd config default > /etc/containerd/config.toml
   notify: 
-      - Restart Containerd
+    - Restart Containerd
