@@ -8,3 +8,7 @@
       - ebtables
   notify: 
     - Switch to Legacy
+- name: Enabling IPv4 forward
+  shell: echo 1 > /proc/sys/net/ipv4/ip_forward
+- name: Enabling netfilter Kernel module
+  shell: modprobe br_netfilter

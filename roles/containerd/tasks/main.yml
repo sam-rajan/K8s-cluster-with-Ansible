@@ -3,7 +3,17 @@
   apt:
     update_cache: yes
     name:
-      - containerd.io
+      - containerd
+- name: Downloading CriCtl 
+  ansible.builtin.get_url:
+    url: https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.28.0/crictl-v1.28.0-linux-amd64.tar.gz
+    dest: /tmp/crictl.tar.gz
+    mode: '0440'
+- name: Installing CriCtl
+  ansible.builtin.unarchive:
+    src: /tmp/crictl.tar.gz
+    dest: /usr/bin/
+    remote_src: yes
 - name: Creates containerd directory
   file:
     path: /etc/containerd
